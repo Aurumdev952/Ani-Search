@@ -3,31 +3,75 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import './App.css'
 import AnimeCard from './AnimeCard';
+import { useState } from 'react';
 
-const anime = {
-    "id": 269,
-    "title": {
-      "romaji": "BLEACH",
-      "english": "Bleach"
-    },
-    "season": "FALL",
-    "seasonYear": 2004,
-    "genres": [
-      "Action",
-      "Adventure",
-      "Supernatural"
-    ],
-    "description": "Ichigo Kurosaki is a rather normal high school student apart from the fact he has the ability to see ghosts. This ability never impacted his life in a major way until the day he encounters the Shinigami Kuchiki Rukia, who saves him and his family's lives from a Hollow, a corrupt spirit that devours human souls. \n<br><br>\nWounded during the fight against the Hollow, Rukia chooses the only option available to defeat the monster and passes her Shinigami powers to Ichigo. Now forced to act as a substitute until Rukia recovers, Ichigo hunts down the Hollows that plague his town. \n\n\n",
-    "coverImage": {
-      "extraLarge": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx269-KxkqTIuQgJ6v.png",
-      "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx269-KxkqTIuQgJ6v.png",
-      "medium": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx269-KxkqTIuQgJ6v.png",
-      "color": "#f19335"
-    }
-}
 
-const App = () => {
-    return (
+  const url = 'https://graphql.anilist.co'
+  const App = () => {
+
+
+  const [query, setQuery] = useState('')
+  const [animes, setAnimes] = useState([])
+
+  const searchAnime = async (query) => {
+    const data = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: `
+        query ($id: Int, $page: Int, $perPage: Int, $search: String, $sort: MediaSort) {
+          Page (page: $page, perPage: $perPage) {
+                  pageInfo {
+                      total
+                      currentPage
+                      lastPage
+                      hasNextPage
+                      perPage
+                  }
+                  media (id: $id, search: $search, sort: [$sort], type: ANIME) {
+                      id
+                      title {
+                          romaji
+                          english
+                      }
+                      season
+                                genres
+                                description
+                                coverImage {
+                        extraLarge
+                        large
+                        medium
+                        color
+                      }
+                            
+      
+      
+                  }
+              }
+          }
+      
+      
+          `,
+        variables: {
+          perPage: 100,
+          page: 0,
+          sort: "POPULARITY_DESC",
+          search: query
+        },
+      }),
+    });
+    const animes = await data.json()
+    // console.log(animes);
+    setAnimes(animes.data.Page.media)
+  
+  }
+
+//   useEffect(() => {
+//     searchAnime();
+//   })
+  return (
         <div className="app">
             <h1 className='title'>Ani Search</h1>
 
@@ -35,23 +79,27 @@ const App = () => {
                 <input 
                 type="text" 
                 placeholder='Enter Anime Name....'
-                value=''
-                onChange={() => {}}                
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}                
                 />
-                <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                <button
+                onClick={() => searchAnime(query)}
+                ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                 
             </div>
 
-            <div className='container'>
-                <AnimeCard anime={anime}/>
-                <AnimeCard anime={anime}/>
-                <AnimeCard anime={anime}/>
-                <AnimeCard anime={anime}/>
-                <AnimeCard anime={anime}/>
-                <AnimeCard anime={anime}/>
-                <AnimeCard anime={anime}/>
-                <AnimeCard anime={anime}/>
-            </div>
+                {animes?.length > 0
+                ? (
+                    <div className='container'>
+                        {animes.map(anime => <AnimeCard anime={anime} />)}
+                    </div>
+                ) : (
+
+                  <h1 className='error'>Search of animes</h1>
+                )
+                
+              
+                }
             
 
         </div>

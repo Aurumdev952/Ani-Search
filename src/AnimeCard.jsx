@@ -10,7 +10,14 @@ const AnimeCard = ({anime}) => {
             {/* <img src={anime.coverImage.extraLarge} alt="" /> */}
             <p className="year">{anime.seasonYear}</p>
             <p className="season">{anime.season}</p>
-            <div><p className="title-anime">{anime.title.english}</p></div>
+            {anime.title.english != null
+            ? (
+                <div><p className="title-anime">{anime.title.english}</p></div>
+            ) : (
+                <div><p className="title-anime">{anime.title.romaji}</p></div>
+            )
+            }
+            {/* <div className="title-anime-div"><p className="title-anime">{anime.title.english}</p></div> */}
         </div>
     )
 }

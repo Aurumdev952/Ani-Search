@@ -63,11 +63,14 @@ box-shadow:  5px 5px 10px #07090c,
   padding: 0 20px;
   font-size: 18px;
   color: var(--color-second);
+  border: none;
+  outline: none;
+
 }
 
-.search-box input:focus {
-  outline: 1px solid var(--color-second);
-}
+/* .search-box input:focus {
+  border-bottom: 1px solid var(--color-second);
+} */
 .search-box input::placeholder {
   color: #d4dbe489;
 }
@@ -141,6 +144,12 @@ box-shadow:  5px 5px 10px #090b0f,
   right: 10px;
   font-weight: 700;
 }
+.year:hover {
+  color: var(--color-second);
+}
+.season:hover {
+  color: var(--color-second);
+}
 /* .container:has(.card:hover) .div {
   background-color: var(--color-main-weak);
 } */
@@ -161,7 +170,7 @@ box-shadow:  5px 5px 10px #090b0f,
 
 }
 
-.card div p {
+.title-anime {
   color: var(--color-second);
   overflow-x: hidden;
 }
