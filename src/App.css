@@ -173,4 +173,6 @@ box-shadow:  5px 5px 10px #090b0f,
 .title-anime {
   color: var(--color-second);
   overflow-x: hidden;
+  text-align: center;
+  font-size: 16px;
 }
