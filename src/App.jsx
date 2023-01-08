@@ -37,9 +37,11 @@ import { useState } from 'react';
                           english
                       }
                       season
-                                genres
-                                description
-                                coverImage {
+                      episodes
+      				  duration
+                      genres
+                      description
+                      coverImage {
                         extraLarge
                         large
                         medium

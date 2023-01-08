@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700");
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
-
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 * {
   margin: 0;
   border: 0;
@@ -10,6 +10,7 @@
 :root {
   --font-roboto: "Roboto Slab", serif;
   --font-raleway: "Raleway", sans-serif;
+  --font-inter: 'Inter', sans-serif;
   --color-main: #0d1117;
   --color-main-weak: #0d11177f;
   --color-second: #d4dbe4;
@@ -153,7 +154,7 @@ box-shadow:  5px 5px 10px #090b0f,
 /* .container:has(.card:hover) .div {
   background-color: var(--color-main-weak);
 } */
-.card div {
+.card .div {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -165,14 +166,192 @@ box-shadow:  5px 5px 10px #090b0f,
   transition: background-color 400ms ease;
 }
 
-.card div:hover {
+.card .div:hover {
   background-color: var(--color-main-weak);
-
 }
 
 .title-anime {
   color: var(--color-second);
   overflow-x: hidden;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
 }
+
+.tooltip-text {
+  position: absolute;
+  top: -100px;
+  left: 100%; 
+  z-index: 2;
+  height: 400px;
+  width: 300px;
+  background-color: #192733;
+  border-radius: 10px;
+  padding: 10px 15px 10px 15px;
+}
+.tooltip-text > p {
+  color: white;
+  font-size: 12px;
+}
+.fade {
+  display: none;
+  opacity: 0;
+  transition: all 0.5s;
+  transition-delay: 10s;
+}
+/* .fade {
+  opacity: 0;
+  transition: opacity 0.5s;
+} */
+.fade:hover {
+  display: inline-block;
+  opacity: 1;
+}
+
+.hover-text:hover .fade { 
+  display: inline-block; 
+  opacity: 1;
+}
+/* .hover-text:hover .fade { opacity: 1; } */
+
+
+/* hover2 */
+.wrapper {
+  position: relative;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+  }
+  
+  .wrapper .tooltip {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-main);
+  bottom: 70%;
+  color: var(--color-second);
+  display: block;
+  left: -20px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 20px;
+  pointer-events: none;
+  position: absolute;
+  width: 150%;
+  height: 350px;
+  -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    -ms-transform: translateY(10px);
+     -o-transform: translateY(10px);
+      transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+     -o-transition: all .25s ease-out;
+      transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  }
+  
+  /* This bridges the gap so you can mouse into the tooltip without it disappearing */
+  .wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  }
+  
+  /* CSS Triangles - see Trevor's post */
+  /* .wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #1496bb 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 50%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+  }
+   */
+  .wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+     -o-transform: translateY(0px);
+      transform: translateY(0px);
+  }
+
+.description {
+  font-size: 10px;
+  line-height: 20px;
+  word-wrap: break-word;
+  overflow-y: scroll;
+  height: 65%;
+  width: 100%;
+  font-family: var(--font-inter);
+}
+.description::-webkit-scrollbar {
+  width: 3px;
+  scroll-behavior: smooth;
+}
+
+
+.description::-webkit-scrollbar-track {
+  background-color: transparent;
+  /* box-shadow: inset 0px 0px 14px -5px rgba(0,0,0,0.23); */
+  /* box-shadow: inset 0px 0px 14px -5px rgba(0,0,0,0.23); */
+}
+
+
+.description::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 10px;
+}
+
+.desc-title {
+  font-size: 16px;
+  color: var(--color-second);
+}
+
+.info {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.info1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.info1 > p{
+  font-size: 12px;
+  color: var(--color-second);
+}
+.info2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+
+}
+.info2 > span{
+  font-size: 8px;
+  padding: 3px 5px;
+  border: 2px solid var(--color-second);
+  border-radius: 10px;
+}
+  
