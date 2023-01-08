@@ -4,7 +4,7 @@
 
 # Ani Search
 
-**ani search** is a website where you can search for anime easily made with *React* and uses [anilist API]().
+**ani search** is a website where you can search for anime easily made with *React* and uses [anilist API](https://github.com/AniList/ApiV2-GraphQL-Docs).
 </div>
 
 
