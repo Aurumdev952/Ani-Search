@@ -2,7 +2,9 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   border: 0;
   box-sizing: border-box;
@@ -20,7 +22,7 @@
 body {
   font-family: var(--font-roboto);
   background-color: var(--color-main);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .app {
@@ -95,8 +97,10 @@ body {
 
 .container {
   height: auto;
-  width: min(100%, 1000px);
-  padding: 30px 20px;
+  width: 100%;
+  /* width: min(100%, 1000px); */
+  padding: 20px;
+  /* padding: 30px 20px; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -105,12 +109,34 @@ body {
   box-shadow: 31px 31px 62px #0b0e13, -31px -31px 62px #0f141b;
 }
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0;
+  }
+} */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
   .container {
     grid-template-columns: repeat(1, 1fr);
     padding: 0;
   }
 }
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up)
+@media only screen and (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0;
+  }
+} */
+/* Large devices (laptops/desktops, 992px and up) */
 
 .container > div {
   display: flex;

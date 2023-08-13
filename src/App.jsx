@@ -4,21 +4,22 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 import AnimeCard from "./AnimeCard";
 import { useState } from "react";
-import {
-  useMutation,
-  useQuery
-} from "@tanstack/react-query"
-import { searchAnime } from "./utils/api";
-
+import { GET_ANIME, searchAnime } from "./utils/api";
+import { useQuery } from "@apollo/client";
 
 const App = () => {
   const [query, setQuery] = useState("");
-  const { data, mutate, isSuccess } = useMutation({
-    mutationFn: searchAnime,
-    onSuccess: (data) => {
-      console.log(data.data.Page.media);
-    }
-  })
+  const [input, setInput] = useState("");
+
+  const { loading, error, data } = useQuery(GET_ANIME, {
+    variables: {
+      // id: Int
+      page: 1,
+      perPage: 50,
+      search: input,
+      sort: "POPULARITY_DESC",
+    },
+  });
   return (
     <div className="app">
       <h1 className="title">Ani Search</h1>
@@ -29,14 +30,14 @@ const App = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button onClick={() => mutate(query)}>
+        <button onClick={() => setInput(query)}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </div>
 
-      {data?.data.Page.media.length > 0 ? (
+      {data?.Page.media.length > 0 ? (
         <div className="container">
-          {data.data.Page.media.map((anime) => (
+          {data.Page.media.map((anime) => (
             <div>
               <AnimeCard anime={anime} />
             </div>

@@ -1,15 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 import {
-    QueryClient,
-    QueryClientProvider,
-} from '@tanstack/react-query'
-import App from './App';
-const queryClient = new QueryClient()
-const root = ReactDOM.createRoot(document.querySelector('#root'));
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "https://graphql.anilist.co",
+  cache: new InMemoryCache(),
+});
+const root = ReactDOM.createRoot(document.querySelector("#root"));
 
 root.render(
-    <QueryClientProvider client={queryClient}>
-        <App />
-    </QueryClientProvider>
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
 );
