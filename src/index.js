@@ -1,10 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client";
 
-import App from './App';
-
-const root = ReactDOM.createRoot(document.querySelector('#root'));
+const client = new ApolloClient({
+  uri: "https://graphql.anilist.co",
+  cache: new InMemoryCache(),
+});
+const root = ReactDOM.createRoot(document.querySelector("#root"));
 
 root.render(
-<App />
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
 );
