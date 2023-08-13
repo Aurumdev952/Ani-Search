@@ -265,7 +265,7 @@ body {
   padding: 20px;
   pointer-events: none;
   position: absolute;
-  width: 150%;
+  width: 120%;
   height: 350px;
   -webkit-transform: translateY(10px);
   -moz-transform: translateY(10px);

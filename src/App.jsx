@@ -37,8 +37,8 @@ const App = () => {
 
       {data?.Page.media.length > 0 ? (
         <div className="container">
-          {data.Page.media.map((anime) => (
-            <div>
+          {data.Page.media.map((anime, i) => (
+            <div key={i}>
               <AnimeCard anime={anime} />
             </div>
           ))}

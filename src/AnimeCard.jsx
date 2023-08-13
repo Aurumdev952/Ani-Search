@@ -21,7 +21,7 @@ const AnimeCard = ({ anime }) => {
       )}
       {/* <div className="title-anime-div"><p className="title-anime">{anime.title.english}</p></div> */}
 
-      <div class="tooltip">
+      <div className="tooltip">
         <p className="desc-title">description</p>
         <p
           className="description"
@@ -41,8 +41,8 @@ const AnimeCard = ({ anime }) => {
             )}
           </div>
           <div className="info2">
-            {anime.genres.map((genre) => (
-              <span>{genre}</span>
+            {anime.genres.map((genre, i) => (
+              <span key={i}>{genre}</span>
             ))}
           </div>
         </div>
